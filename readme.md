@@ -1,4 +1,18 @@
+<p align="center">
+  <br>
+  <b>创造不息，交付不止</b>
+  <br>
+  <a href="https://www.yousails.com">
+    <img src="https://yousails.com/banners/brand.png" width=350>
+  </a>
+  
+  <br>
+  <a href="https://laravel-china.org/topics/3383/laravel-the-first-chinese-new-book-laravel-tutorial">
+    <img src="http://ww1.sinaimg.cn/large/6d86d850gw1fao8va0fv0j208y0aw74v.jpg" width=200>
+  </a>
+</p>
 
+---
 
 ![macbook](https://cloud.githubusercontent.com/assets/324764/18414545/d875e012-77ff-11e6-9249-0b56a6460cb8.png)
 
@@ -208,4 +222,4 @@ php artisan make:scaffold NotificationMailLogs --schema="from_user_id:integer:un
 
 在遵守以上规则的情况下，你可以享受等同于 MIT 协议的授权。
 
-或者你可以联系 `cj@estgroupe.com` 购买商业授权，商业授权允许移除页脚和标题的 `Powered by PHPHub` 字样。
+或者你可以联系 `aufree@yousails.com` 购买商业授权，商业授权允许移除页脚和标题的 `Powered by PHPHub` 字样。

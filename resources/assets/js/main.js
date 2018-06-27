@@ -123,7 +123,7 @@
          * Open External Links In New Window
          */
         initExternalLink: function(){
-            $('.topics-show a[href^="http://"], .topics-show a[href^="https://"]').each(function() {
+            $('.content-body a[href^="http://"], .content-body a[href^="https://"]').each(function() {
                var a = new RegExp('/' + window.location.host + '/');
                if(!a.test(this.href) ) {
                    $(this).click(function(event) {
@@ -808,6 +808,7 @@
                 var total = $('.replies .total b');
                 var voteCount = $('#vote-count');
                 var upVote = $('#up-vote');
+                var inShareLinkIndex = $('.share-link-index');
                 var isVote = that.is('.vote');
                 var isUpVote = that.is('#up-vote');
                 var isCommentVote= that.is('.comment-vote');
@@ -940,6 +941,10 @@
                             } else if (data.type === 'add') {
                                 commenVoteCount.html(num + 1);
                             }
+                        }
+
+                        if (inShareLinkIndex && isVote) {
+                            that.find('span').text(data.count);
                         }
                     }
                 }).fail(function() {

@@ -1,20 +1,18 @@
 @extends('layouts.default')
 
 @section('title')
-{{ isset($topic) ? '编辑话题' : lang('Create New Topic') }}_@parent
+{{ isset($topic) ? '编辑链接' : '分享链接' }}_@parent
 @stop
 
 @section('content')
 
-<div class="topic_create">
+<div class="topic_create share-link">
+
+    <h1 class="header"><i class="fa fa-link"></i> 分享</h1>
 
   <div class="col-md-8 main-col">
 
     <div class="reply-box form box-block">
-
-      <div class="alert alert-warning">
-          {!! lang('be_nice') !!}
-      </div>
 
       @include('layouts.partials.errors')
 
@@ -25,41 +23,23 @@
         <form method="POST" action="{{ route('topics.store') }}" accept-charset="UTF-8" id="topic-create-form" class="topic-form">
       @endif
         {!! csrf_field() !!}
-        <div class="form-group">
-            <select class="selectpicker form-control" name="category_id" id="category-select" required="require">
 
-              <option value="" disabled {{ count($category) != 0 ?: 'selected' }}>{{ lang('Pick a category') }}</option>
-
-              @foreach ($categories as $value)
-                  {{-- 如果用户可以发布公告，并且是 id == 3 的话 --}}
-                  @if($value->id != 3 || Auth::user()->can('compose_announcement'))
-                      @if($value->id != config('phphub.admin_board_cid') || Auth::user()->can('access_board'))
-                          <option value="{{ $value->id }}" {{ (count($category) != 0 && $value->id == $category->id) ? 'selected' : '' }} >{{ $value->name }}</option>
-                      @endif
-                  @endif
-              @endforeach
-            </select>
-        </div>
-
-
-        @foreach ($categories as $cat)
-            <div class="category-hint alert alert-warning category-{{ $cat->id }} {{ count($category) && $cat->id == $category->id ? 'animated rubberBand ' : ''}}" style="{{ (count($category) && $cat->id == $category->id) ? '' : 'display:none' }}">
-                {!! $cat->description !!}
-            </div>
-        @endforeach
+        <input name="category_id" type="hidden" value="{{ config('phphub.hunt_category_id') }}">
 
         <div class="form-group">
             <input class="form-control" id="topic-title" placeholder="{{ lang('Please write down a topic') }}" name="title" type="text" value="{{ !isset($topic) ? '' : $topic->title }}" required="require">
         </div>
 
-        @include('topics.partials.composing_help_block')
+        <div class="form-group">
+            <input class="form-control" id="topic-link" placeholder="分享的链接" name="link" type="text" value="{{ !isset($topic) ? '' : $topic->share_link->link }}" required="require">
+        </div>
 
         <div class="form-group">
-            <textarea required="require" class="form-control" rows="20" style="overflow:hidden" id="reply_content" placeholder="{{ lang('Please using markdown.') }}" name="body" cols="50">{{ !isset($topic) ? '' : $topic->body_original }}</textarea>
+            <textarea class="form-control" rows="20" style="overflow:hidden" id="reply_content" placeholder="描述，可不写！" name="body" cols="30">{{ !isset($topic) ? '' : $topic->body_original }}</textarea>
         </div>
 
         <div class="form-group status-post-submit">
-            <button class="btn btn-primary submit-btn" id="topic-submit" type="submit">{{ lang('Publish') }}</button>
+            <button class="btn btn-primary submit-btn" id="topic-submit" type="submit"><i class="fa fa-paper-plane"></i> 分享链接</button>
         </div>
 
     </form>
@@ -75,27 +55,13 @@
       </div>
       <div class="panel-body">
         <ul class="list">
-          <li>请传播美好的事物，这里拒绝低俗、诋毁、谩骂等相关信息</li>
-          <li>请尽量分享技术相关的话题，谢绝发布社会, 政治等相关新闻</li>
-          <li>这里绝对不讨论任何有关盗版软件、音乐、电影如何获得的问题</li>
+          <li>请传播美好的事物，拒绝低俗、诋毁、谩骂等相关信息</li>
+          <li>请尽量分享技术相关的话题，谢绝社会, 政治等新闻</li>
+          <li>无论任何情况下，请保持友善</li>
+          <li>绝对不讨论有关盗版软件、音乐、电影如何获得的问题</li>
       </div>
     </div>
 
-    <div class="panel panel-default corner-radius help-box">
-      <div class="panel-heading text-center">
-        <h3 class="panel-title">{{ lang('We can benefit from it.') }}</h3>
-      </div>
-      <div class="panel-body">
-        <ul class="list">
-          <li>分享生活见闻, 分享知识</li>
-          <li>接触新技术, 讨论技术解决方案</li>
-          <li>为自己的创业项目找合伙人, 遇见志同道合的人</li>
-          <li>自发线下聚会, 加强社交</li>
-          <li>发现更好工作机会</li>
-          <li>甚至是开始另一个神奇的开源项目</li>
-        </ul>
-      </div>
-    </div>
 
   </div>
 </div>

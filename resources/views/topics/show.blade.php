@@ -8,6 +8,14 @@
 {{{ $topic->excerpt }}}
 @stop
 
+@section('wechat_icon')
+    @if ($cover = $topic->cover())
+        <img src="{{ img_crop($cover->link, 512, 512) }}" alt="">
+    @else
+        @parent
+    @endif
+@stop
+
 @section('content')
 
 <div class="col-md-9 topics-show main-col">
@@ -15,7 +23,14 @@
   <div class="topic panel panel-default">
     <div class="infos panel-heading">
 
-      <h1 class="panel-title topic-title">{{{ $topic->title }}}</h1>
+      <h1 class="panel-title topic-title">
+        @if ($topic->isShareLink())
+            <a href="{{ $topic->share_link->link }}" target="_blank">
+                <i class="fa fa-link"></i>
+            </a>
+        @endif
+        {{{ $topic->title }}}
+        </h1>
 
       @include('topics.partials.meta')
     </div>
