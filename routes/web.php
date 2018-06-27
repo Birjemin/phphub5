@@ -1,5 +1,4 @@
 <?php
-require_once 'client.php';
 # ------------------ User stuff ------------------------
 
 Route::get('/users/drafts', 'UsersController@drafts')->name('users.drafts');
