@@ -1,17 +1,5 @@
 <?php
-# ------------------ Page Route ------------------------
-Route::get('/', 'PagesController@home')->name('home');
-Route::get('/about', 'PagesController@about')->name('about');
-Route::get('/search', 'PagesController@search')->name('search');
-Route::get('/feed', 'PagesController@feed')->name('feed');
-Route::get('/wiki', 'PagesController@wiki')->name('wiki');
-Route::get('/sitemap', 'PagesController@sitemap');
-Route::get('/sitemap.xml', 'PagesController@sitemap');
-Route::get('/hall_of_fames', 'PagesController@hallOfFames')->name('hall_of_fames');
-Route::get('/composer', 'PagesController@composer')->name('composer');
-
-Route::get('/roles/{id}', 'RolesController@show')->name('roles.show');
-
+require_once 'client.php';
 # ------------------ User stuff ------------------------
 
 Route::get('/users/drafts', 'UsersController@drafts')->name('users.drafts');
